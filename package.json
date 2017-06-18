@@ -1,0 +1,17 @@
+{
+  "name": "generator-ctu",
+  "version": "0.1.0",
+  "description": "ctu generator",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "colors": "^1.1.2",
+    "request": "^2.81.0",
+    "tar": "^3.1.5",
+    "yeoman-generator": "^1.1.1"
+  }
+}
