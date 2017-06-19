@@ -85,6 +85,7 @@ class CTU extends Generator {
   install() {
     this.log('正在下载项目依赖'.green)    
     this.spawnCommandSync('npm', ['install', '--registry=https://registry.npm.taobao.org'])
+    this.log('正在启动项目'.green)
     this.spawnCommandSync('npm', ['start'])
   }
 
