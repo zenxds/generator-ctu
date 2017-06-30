@@ -19,6 +19,11 @@ module.exports = {
       name: "koa-boilerplate",
       description: "Koa",
       repository: "https://github.com/zenxds/koa-boilerplate/archive/master.tar.gz"
+    },
+    {
+      name: "h5-boilerplate",
+      description: "H5运营",
+      repository: "https://github.com/zenxds/h5-boilerplate/archive/master.tar.gz"
     }
   ]
 }
