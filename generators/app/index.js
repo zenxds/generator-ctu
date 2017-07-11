@@ -40,7 +40,7 @@ class CTU extends Generator {
         type: 'input',        
         name: 'name',
         message: '请输入项目名',
-        default: this.appname
+        default: path.basename(this.destinationRoot())
       },
       {
         type: 'input',        
