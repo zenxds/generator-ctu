@@ -76,6 +76,10 @@ class CTU extends Generator {
     const answers = this.answers
     const repository = config.projects[answers.type].repository
 
+    if (!util.isEmptyDir(root)) {
+      return Promise.reject('目标目录不为空')
+    }
+
     this.log('正在下载项目模板'.green)
     return util.downloadAndUnzip(repository, root).then(() => {
       const json = require(jsonPath)
