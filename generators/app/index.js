@@ -23,6 +23,7 @@ class CTU extends Generator {
   }
 
   prompting() {
+    const basename = path.basename(this.destinationRoot())
     return this.prompt([
       {
         type: 'list',        
@@ -40,13 +41,19 @@ class CTU extends Generator {
         type: 'input',        
         name: 'name',
         message: '请输入项目名',
-        default: path.basename(this.destinationRoot())
+        default: basename
       },
       {
         type: 'input',        
         name: 'version',
         message: '请输入项目版本号',
         default: '0.1.0'
+      },
+      {
+        type: 'input',        
+        name: 'description',
+        message: '请输入项目描述',
+        default: basename
       },
       {
         type: 'input',        
@@ -75,7 +82,10 @@ class CTU extends Generator {
       Object.assign(json, {
         name: answers.name,
         version: answers.version,
-        author: answers.author
+        description: answers.description,
+        author: {
+          name: answers.author
+        }
       })
 
       fs.writeFileSync(jsonPath, JSON.stringify(json, null, 2))
