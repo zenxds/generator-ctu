@@ -97,8 +97,11 @@ class CTU extends Generator {
   }
 
   install() {
+    const root = this.destinationRoot()
+    const useYarn = fs.existsSync(path.join(root, 'yarn.lock'))
+
     this.log('正在安装项目依赖'.green)    
-    this.spawnCommandSync('npm', ['install', '--registry=https://registry.npm.taobao.org'])
+    this.spawnCommandSync(useYarn ? 'yarn' : 'npm', ['install', '--registry=https://registry.dingxiang-inc.net'])
     this.log('正在启动项目'.green)
     this.spawnCommandSync('npm', ['start'])
   }
