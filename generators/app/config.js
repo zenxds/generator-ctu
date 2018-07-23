@@ -24,6 +24,11 @@ module.exports = {
       name: "h5-boilerplate",
       description: "H5运营",
       repository: "https://github.com/zenxds/h5-boilerplate/archive/master.tar.gz"
+    },
+    {
+      name: "node-lib-boilerplate",
+      description: "node lib",
+      repository: "https://github.com/zenxds/node-lib-boilerplate/archive/master.tar.gz"
     }
   ]
 }
