@@ -27,7 +27,7 @@ module.exports = {
     },
     {
       name: "node-lib-boilerplate",
-      description: "node lib",
+      description: "Node Lib",
       repository: "https://github.com/zenxds/node-lib-boilerplate/archive/master.tar.gz"
     }
   ]
