@@ -26,7 +26,7 @@ class CTU extends Generator {
     const basename = path.basename(this.destinationRoot())
     return this.prompt([
       {
-        type: 'list',        
+        type: 'list',
         name: 'type',
         message: '请选择项目类型',
         choices: config.projects.map((item, index) => {
@@ -38,25 +38,25 @@ class CTU extends Generator {
         store: true
       },
       {
-        type: 'input',        
+        type: 'input',
         name: 'name',
         message: '请输入项目名',
         default: basename
       },
       {
-        type: 'input',        
+        type: 'input',
         name: 'version',
         message: '请输入项目版本号',
         default: '0.1.0'
       },
       {
-        type: 'input',        
+        type: 'input',
         name: 'description',
         message: '请输入项目描述',
         default: basename
       },
       {
-        type: 'input',        
+        type: 'input',
         name: 'author',
         message: '请输入项目作者',
         default: os.userInfo().username
@@ -72,7 +72,7 @@ class CTU extends Generator {
 
   writing() {
     const root = this.destinationRoot()
-    const jsonPath = path.join(root, 'package.json')    
+    const jsonPath = path.join(root, 'package.json')
     const answers = this.answers
     const repository = config.projects[answers.type].repository
 

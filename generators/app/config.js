@@ -34,6 +34,11 @@ module.exports = {
       name: "node-lib-boilerplate",
       description: "Node Lib",
       repository: "https://github.com/zenxds/node-lib-boilerplate/archive/master.tar.gz"
+    },
+    {
+      name: "react-lib-boilerplate",
+      description: "React Lib",
+      repository: "https://github.com/zenxds/react-lib-boilerplate/archive/master.tar.gz"
     }
   ]
 }
