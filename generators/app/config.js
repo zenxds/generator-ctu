@@ -39,6 +39,11 @@ module.exports = {
       name: "react-lib-boilerplate",
       description: "React Lib",
       repository: "https://github.com/zenxds/react-lib-boilerplate/archive/master.tar.gz"
+    },
+    {
+      name: "boilerplate-component-gallery",
+      description: "Component Gallery",
+      repository: "https://dev.dingxiang-inc.com/dxd/boilerplate-component-gallery/-/archive/master/boilerplate-component-gallery-master.tar.gz"
     }
   ]
 }
