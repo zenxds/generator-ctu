@@ -44,6 +44,11 @@ module.exports = {
       name: "boilerplate-component-gallery",
       description: "Component Gallery",
       repository: "https://dev.dingxiang-inc.com/dxd/boilerplate-component-gallery/-/archive/master/boilerplate-component-gallery-master.tar.gz"
+    },
+    {
+      name: "boilerplate-simple-component",
+      description: "Simple Component",
+      repository: "https://dev.dingxiang-inc.com/dxd/boilerplate-simple-component/-/archive/master/boilerplate-simple-component-master.tar.gz"
     }
   ]
 }
