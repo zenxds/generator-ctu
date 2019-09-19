@@ -39,6 +39,16 @@ module.exports = {
       name: "react-lib-boilerplate",
       description: "React Lib",
       repository: "https://github.com/zenxds/react-lib-boilerplate/archive/master.tar.gz"
+    },
+    {
+      name: "boilerplate-component-gallery",
+      description: "组件库",
+      repository: "https://github.com/gafish/boilerplate-component-gallery/archive/master.tar.gz"
+    },
+    {
+      name: "boilerplate-simple-component",
+      description: "单个组件",
+      repository: "https://github.com/gafish/boilerplate-simple-component/archive/master.tar.gz"
     }
   ]
 }
