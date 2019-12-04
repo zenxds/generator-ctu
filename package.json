@@ -1,6 +1,6 @@
 {
-  "name": "@dx/generator-ctu",
-  "version": "0.2.2",
+  "name": "generator-ctu",
+  "version": "0.2.3",
   "description": "ctu generator",
   "files": [
     "generators",

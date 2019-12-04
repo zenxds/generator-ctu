@@ -16,6 +16,11 @@ module.exports = {
       repository: "https://github.com/zenxds/react-spa-boilerplate/archive/master.tar.gz"
     },
     {
+      name: "nightkay-app-boilerplate",
+      description: "nightKay App",
+      repository: "https://github.com/zenxds/nightkay-app-boilerplate/archive/master.tar.gz"
+    },
+    {
       name: "h5-boilerplate",
       description: "H5运营",
       repository: "https://github.com/zenxds/h5-boilerplate/archive/master.tar.gz"
