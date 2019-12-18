@@ -87,7 +87,7 @@ class CTU extends Generator {
     const answers = this.answers
     const repository = config.projects[answers.type.index].repository
     const isSimpleMode = util.isSimpleMode(answers.type)
-    const root = isSimpleMode ? process.cwd():this.destinationRoot()
+    const root = isSimpleMode ? process.cwd(): this.destinationRoot()
     const jsonPath = path.join(root, 'package.json')
 
     if (!util.isEmptyDir(root)) {
@@ -121,13 +121,15 @@ class CTU extends Generator {
   install() {
     const answers = this.answers
     // 简单模式不需要执行安装
-    if (util.isSimpleMode(answers.type)) return
+    if (util.isSimpleMode(answers.type)) {
+      return
+    }
 
     const root = this.destinationRoot()
     const useYarn = fs.existsSync(path.join(root, 'yarn.lock'))
 
-    this.log('正在安装项目依赖'.green)    
-    this.spawnCommandSync(useYarn ? 'yarn' : 'npm', ['install', '--registry=https://registry.dingxiang-inc.net'])
+    this.log('正在安装项目依赖'.green)
+    this.spawnCommandSync(useYarn ? 'yarn' : 'npm', ['install', '--registry=https://registry.dingxiang-inc.com'])
     this.log('正在启动项目'.green)
     this.spawnCommandSync('npm', ['start'])
   }
