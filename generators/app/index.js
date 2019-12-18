@@ -36,33 +36,43 @@ class CTU extends Generator {
           }
         }),
         store: true
-      },
-      {
-        type: 'input',
-        name: 'name',
-        message: '请输入项目名',
-        default: basename
-      },
-      {
-        type: 'input',
-        name: 'version',
-        message: '请输入项目版本号',
-        default: '0.1.0'
-      },
-      {
-        type: 'input',
-        name: 'description',
-        message: '请输入项目描述',
-        default: basename
-      },
-      {
-        type: 'input',
-        name: 'author',
-        message: '请输入项目作者',
-        default: os.userInfo().username
       }
     ]).then((answers) => {
       this.answers = answers
+      // 单个组件模板不需要填参数
+      if (this.answers.type === 11) {
+        return Promise.resolve()
+      }
+      return this.prompt([
+        {
+          type: 'input',
+          name: 'name',
+          message: '请输入项目名',
+          default: basename
+        },
+        {
+          type: 'input',
+          name: 'version',
+          message: '请输入项目版本号',
+          default: '0.1.0'
+        },
+        {
+          type: 'input',
+          name: 'description',
+          message: '请输入项目描述',
+          default: basename
+        },
+        {
+          type: 'input',
+          name: 'author',
+          message: '请输入项目作者',
+          default: os.userInfo().username
+        }
+      ])
+    }).then((answers) => {
+      if (answers) {
+        this.answers = { ...this.answers, ...answers }
+      }
     })
   }
 
@@ -71,16 +81,25 @@ class CTU extends Generator {
   }
 
   writing() {
-    const root = this.destinationRoot()
-    const jsonPath = path.join(root, 'package.json')
     const answers = this.answers
+    const isSimpleComponent = answers.type === 11
     const repository = config.projects[answers.type].repository
+    const root = isSimpleComponent ? process.cwd():this.destinationRoot()
+    const jsonPath = path.join(root, 'package.json')
 
     if (!util.isEmptyDir(root)) {
       return Promise.reject('目标目录不为空')
     }
-
+    
     this.log('正在下载项目模板'.green)
+    
+    // 单个组件模板仅需要下载模板到当前目录
+    if (isSimpleComponent) {
+      return util.downloadAndUnzip(repository, root).then(() => {
+        this.log('当前任务已完成'.blue)
+      })
+    }
+
     return util.downloadAndUnzip(repository, root).then(() => {
       const json = require(jsonPath)
       Object.assign(json, {
@@ -97,6 +116,9 @@ class CTU extends Generator {
   }
 
   install() {
+    // 单个组件模板不需要执行安装
+    if (this.answers.type === 11) return
+
     const root = this.destinationRoot()
     const useYarn = fs.existsSync(path.join(root, 'yarn.lock'))
 
