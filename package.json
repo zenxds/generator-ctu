@@ -1,5 +1,5 @@
 {
-  "name": "generator-ctu",
+  "name": "@dx/generator-ctu",
   "version": "0.2.3",
   "description": "ctu generator",
   "files": [
