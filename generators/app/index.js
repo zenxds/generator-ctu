@@ -6,6 +6,8 @@ const Generator = require('yeoman-generator')
 const config = require('./config')
 const util = require('../../lib/util')
 
+const isNotSimpleMode = answers => !util.isSimpleMode(answers.type)
+
 class CTU extends Generator {
   constructor(args, opts) {
     super(args, opts)
@@ -24,6 +26,7 @@ class CTU extends Generator {
 
   prompting() {
     const basename = path.basename(this.destinationRoot())
+    
     return this.prompt([
       {
         type: 'list',
@@ -32,47 +35,47 @@ class CTU extends Generator {
         choices: config.projects.map((item, index) => {
           return {
             name: item.description,
-            value: index
+            value: { ...item, index },
           }
         }),
-        store: true
+        store: true,
+        pageSize: 20
+      },
+      {
+        type: 'input',
+        name: 'name',
+        message: '请输入项目名',
+        default: basename,
+        // 简单模式不需要输入项目名
+        when: isNotSimpleMode
+      },
+      {
+        type: 'input',
+        name: 'version',
+        message: '请输入项目版本号',
+        default: '0.1.0',
+        // 简单模式不需要输入版本号
+        when: isNotSimpleMode
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: '请输入项目描述',
+        default: basename,
+        // 简单模式不需要输入项目描述
+        when: isNotSimpleMode
+      },
+      {
+        type: 'input',
+        name: 'author',
+        message: '请输入项目作者',
+        default: os.userInfo().username,
+        // 简单模式不需要输入作者
+        when: isNotSimpleMode
       }
-    ]).then((answers) => {
+    ])
+    .then((answers) => {
       this.answers = answers
-      // 单个组件模板不需要填参数
-      if (this.answers.type === 11) {
-        return Promise.resolve()
-      }
-      return this.prompt([
-        {
-          type: 'input',
-          name: 'name',
-          message: '请输入项目名',
-          default: basename
-        },
-        {
-          type: 'input',
-          name: 'version',
-          message: '请输入项目版本号',
-          default: '0.1.0'
-        },
-        {
-          type: 'input',
-          name: 'description',
-          message: '请输入项目描述',
-          default: basename
-        },
-        {
-          type: 'input',
-          name: 'author',
-          message: '请输入项目作者',
-          default: os.userInfo().username
-        }
-      ])
-    }).then((answers) => {
-      if (answers) {
-        this.answers = { ...this.answers, ...answers }
-      }
     })
   }
 
@@ -82,9 +85,9 @@ class CTU extends Generator {
 
   writing() {
     const answers = this.answers
-    const isSimpleComponent = answers.type === 11
-    const repository = config.projects[answers.type].repository
-    const root = isSimpleComponent ? process.cwd():this.destinationRoot()
+    const repository = config.projects[answers.type.index].repository
+    const isSimpleMode = util.isSimpleMode(answers.type)
+    const root = isSimpleMode ? process.cwd():this.destinationRoot()
     const jsonPath = path.join(root, 'package.json')
 
     if (!util.isEmptyDir(root)) {
@@ -93,9 +96,9 @@ class CTU extends Generator {
     
     this.log('正在下载项目模板'.green)
     
-    // 单个组件模板仅需要下载模板到当前目录
-    if (isSimpleComponent) {
-      return util.downloadAndUnzip(repository, root).then(() => {
+    // 简单模式仅需要下载模板到当前目录
+    if (isSimpleMode) {
+      return util.downloadAndUnzip(repository, process.cwd()).then(() => {
         this.log('当前任务已完成'.blue)
       })
     }
@@ -116,8 +119,9 @@ class CTU extends Generator {
   }
 
   install() {
-    // 单个组件模板不需要执行安装
-    if (this.answers.type === 11) return
+    const answers = this.answers
+    // 简单模式不需要执行安装
+    if (util.isSimpleMode(answers.type)) return
 
     const root = this.destinationRoot()
     const useYarn = fs.existsSync(path.join(root, 'yarn.lock'))
