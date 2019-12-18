@@ -46,14 +46,16 @@ module.exports = {
       repository: "https://github.com/zenxds/react-lib-boilerplate/archive/master.tar.gz"
     },
     {
+      index: 8,
       name: "boilerplate-component-gallery",
-      description: "Component Gallery",
-      repository: "https://dev.dingxiang-inc.com/dxd/boilerplate-component-gallery/-/archive/master/boilerplate-component-gallery-master.tar.gz"
+      description: "组件库",
+      repository: "https://github.com/gafish/boilerplate-component-gallery/archive/master.tar.gz"
     },
     {
+      index: 9,
       name: "boilerplate-simple-component",
-      description: "Simple Component",
-      repository: "https://dev.dingxiang-inc.com/dxd/boilerplate-simple-component/-/archive/master/boilerplate-simple-component-master.tar.gz"
+      description: "单个组件",
+      repository: "https://github.com/gafish/boilerplate-simple-component/archive/master.tar.gz"
     }
   ]
 }
